@@ -17,7 +17,7 @@ int jih[1001][1001];
 pair<int,int> tempPos ; 
 pair<int, int> jPos; 
 queue<pair<int, int> > q ;
-int cnt = 1000000;
+
 int main() {
   ios::sync_with_stdio(0);
     cin.tie(0); 
@@ -47,7 +47,6 @@ int main() {
                       if(arr[nx][ny] == 'F' || arr[nx][ny] == '#') continue;
                       if(fir[nx][ny] == 0 || fir[nx][ny] > fir[x][y] + 1) {
                         fir[nx][ny] = fir[x][y] + 1 ;
-
                         q.push(make_pair(nx,ny));
                       } 
                   }
@@ -63,14 +62,15 @@ int main() {
                   q.pop();
                   int x = tempPos.X ;
                   int y = tempPos.Y ;
-                  if(x == r-1 || x == 0 || y == c-1 || y ==0) {
-                          if(cnt > jih[x][y]) cnt = jih[x][y];
-                        } 
                    for(int k = 0 ; k < 4 ; k++) {
                     int nx = x + dx[k] ;
                     int ny = y + dy[k] ;
-                    if(nx >= r || nx < 0 || ny >= c || ny < 0 ) continue;
-                    if(arr[nx][ny] == '.' && jih[nx][ny] == 0 && (fir[nx][ny] == 0 || fir[nx][ny] > jih[x][y] + 1 )) {
+                    if(nx >= r || nx < 0 || ny >= c || ny < 0 ) {
+                      cout << jih[x][y] + 1 ;
+                      return 0 ;
+                    }
+                    if(jih[nx][ny] > 0) continue;
+                    if(arr[nx][ny] == '.' && (fir[nx][ny] == 0 || fir[nx][ny] > jih[x][y] + 1 )) {
                         q.push(make_pair(nx,ny));
                         jih[nx][ny] = jih[x][y] + 1 ;
                         
@@ -79,14 +79,7 @@ int main() {
 
                    }
             }
-
-        if(cnt != 1000000) {
-          cout << cnt+1 ;
-        }
-        else {
-          if( jPos.X == 0 || jPos.X == r-1 || jPos.Y ==0 || jPos.Y == c-1) cout << 1 ;
-          else cout << "IMPOSSIBLE" ; 
-        }
+       cout << "IMPOSSIBLE" ; 
 }
 
 /*
@@ -94,9 +87,9 @@ int main() {
 
 [시작]
 1. 실패 -> 지훈이를 옮기는 과정에서 cnt 문제 .
-
+2. 간신히 성공 -> but 코드가 깔끔하지 못하고 예외처리 계속해줌 -> 그닥 좋은 코드는 아님.
 [배울 점]
-
+- 
 [문제 이해]
 - 지훈이의 위치와 불이 붙은 위치 주어짐.
 - 지훈이는 불이 타기전에 탈출가능 여부, 그리고 얼마나 빨리 탈출할 수 있는지 결정
