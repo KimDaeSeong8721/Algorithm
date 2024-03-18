@@ -5,13 +5,13 @@
 using namespace std;
 
 
+
  
 vector<pair<int,pair<int,int>>> cctvs;
 int n, m ;
 int arr[9][9];
 int result = 100000; 
 
-vector<pair<int,int>> overlay ;
 void rotate(int num) { // 배열을 돌리기.
     while(num--) {
         cctvs.clear();
@@ -129,10 +129,6 @@ void backtracking(int cnt) {
         painting(sort,x,y,true,i);
         backtracking(cnt+1);
         painting(sort,x,y, false,i);
-        for(auto e : overlay) {
-            arr[e.first][e.second] = -1 ;
-        }
-        overlay.clear();
     }
 }
 
@@ -147,7 +143,6 @@ int main() {
         for(int j = 0 ; j < m ; j++)
             if(arr[i][j] > 0 && arr[i][j] < 6) {cctvs.push_back({arr[i][j],{i,j}});
             }
-
     backtracking(0);
     cout << result ; 
 }
@@ -158,7 +153,8 @@ int main() {
 [시작]
 
 [배울 점]
-
+- 백트래킹 시 되돌리는 부분을 주의깊게 구성하자.
+- 바킹독은 진법으로 풀이함.
 [문제 이해]
 - N x M 크기 직사각형
 - 총 K개의 cctv
@@ -197,7 +193,6 @@ int main() {
 아무리 생각해도 배열을 돌리는 건 아닌듯.
 
 배열을 돌리지말고 화살표 방향 설정을 추가하자.
-
 
 
 */
