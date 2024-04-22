@@ -1,34 +1,43 @@
-#include <iostream>
 #include <algorithm>
+#include <iostream>
+#include <vector>
 using namespace std;
-const int inf = 100000000;
-int t[20];
-int p[20];
-int d[20];
+
+int t[16];
+int p[16];
+int tempTot;
+int maxTot;
 int n;
-int go(int day) {
-    if (day == n+1) {
-        return 0;
-    }
-    if (day > n+1) {
-        return -inf;
-    }
-    if (d[day] != -1) {
-        return d[day];
-    }
-    int t1 = go(day+1); // x
-    int t2 = p[day] + go(day+t[day]); // o
-    d[day] = max(t1,t2);
-    return d[day];
+void dfs(int cnt) {
+  if (cnt == n) {
+    maxTot = max(tempTot, maxTot);
+    // tempTot = 0 ;
+    return;
+  }
+  if (t[cnt] + cnt < n) {
+    tempTot += p[cnt];
+    dfs(cnt + t[cnt] + 1);
+    tempTot -= p[cnt];
+  } 
+  dfs(cnt + 1);
+
 }
+
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cin >> n;
-    for (int i=1; i<=n; i++) {
-        cin >> t[i] >> p[i];
-        d[i] = -1;
-    }
-    cout << go(1) << '\n';
-    return 0;
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  cin >> n;
+  for (int i = 0; i < n; i++) {
+    int a;
+    int b;
+    cin >> a >> b;
+    t[i] = a - 1;
+    p[i] = b;
+  }
+
+  for (int i = 0; i < n; i++) {
+    dfs(i);
+  }
+
+  cout << maxTot;
 }
