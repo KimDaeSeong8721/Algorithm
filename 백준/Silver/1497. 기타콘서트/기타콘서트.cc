@@ -11,15 +11,13 @@ int answer = 100 ;
 long long maxTot ; 
 
 void backTracking(int cnt, long long tot) {
-
-    if(maxTot < tot) {
+    if(cnt == n){
+        if(maxTot <= tot) {
             maxTot = tot ;
-            answer = gitar_cnt ;
-        } else if( maxTot == tot) {
              answer = min(answer, gitar_cnt);
+        }
+        return;
     }
-
-    if(cnt == n){ return; }
         // 현재 기타 포함
         gitar_cnt += 1;
         backTracking(cnt+1, tot | gitar[cnt]);
@@ -37,7 +35,7 @@ int main() {
         cin >> g >> s ; 
         long tot = 0;
         for(int j = 0 ; j < m ; j++){
-            if(s[j] == 'Y') tot += (1L << j); 
+            if(s[j] == 'Y') tot += (1LL << j); 
         }
         gitar[i] = tot ; 
     }
