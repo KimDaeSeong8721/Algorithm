@@ -37,7 +37,7 @@ int main() {
         cin >> g >> s ; 
         long tot = 0;
         for(int j = 0 ; j < m ; j++){
-            if(s[j] == 'Y') tot += (1LL << j); 
+            if(s[j] == 'Y') tot += (1L << j); 
         }
         gitar[i] = tot ; 
     }
