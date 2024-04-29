@@ -16,12 +16,8 @@ int main() {
         cin >> w[i] >> v[i];
     }
 
-    for(int j = 1 ; j <= k ; j++){
-        if(j- w[1] >= 0){
-        dp[1][j] = v[1];
-        } 
-    }
-    for(int i = 2 ; i <= n ; i++){
+
+    for(int i = 1 ; i <= n ; i++){
         for(int j = 1 ; j <= k ; j++) {
             if(j-w[i] >= 0){
                 // 배낭에 물건 담음
