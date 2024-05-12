@@ -33,7 +33,7 @@ int solution(vector<int> queue1, vector<int> queue2) {
 
     while(1) {
         if(q1_sum == val) break;
-        if(q1.empty() || q2.empty() || (q1_sum + q2_sum) % 2 == 1) {answer = -1 ; break ; }
+        if(q1.empty() || q2.empty() ) {answer = -1 ; break ; }
         int s = max(q1.size(),q2.size());
         if(answer > s*2 ) {answer = -1 ; break ; }
         else if(q1_sum > val) {
