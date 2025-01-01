@@ -1,91 +1,34 @@
-
 #include <iostream>
 #include <algorithm>
+#include <unordered_map>
+
 using namespace std;
 
-int t ;
-int n ;
 
-unordered_map<string,int> map; 
+
 
 int main() {
   ios::sync_with_stdio(0);
     cin.tie(0); 
+    int t;
+    cin >> t ;
 
-  cin >>  t;
-  
-  while (t--)
-  {
-    cin >> n ;
-    while (n--)
-    {
-      string sort ; string name ;
-      cin >> name >> sort ;
-      map[sort]++ ; 
-    }
-
-    int cnt = 1 ;
-    
-    for(auto a : map) {
-      cnt *= (a.second + 1);
-    }
-    
-    map.clear(); 
-
-    cout << cnt -1 << '\n'; 
-    
-  }
-  
-  
-
-
-  
+while(t--) {
+    int n ; 
+    cin >> n ; 
+    unordered_map<string,int> m ;
+while (n--)
+{
+    string name, type ;
+    cin >> name >> type ;
+    m[type]++;
 }
+    int result = 1;
 
-
-/*
-[해결전략 참고]
-- 정답 살짝만 봤는데 코드가 짧음
-
-[시작]
-- 3.6 일 -> 방법을 잘 모르겠음 -> 실패
-- 3월 26일 8:00 -> 다시
-
-[배울 점]
-- 해시 맵 선언하면 int Value는 0으로 자동 초기화되어 있음.
-- 부분집합의 개수를 구할 때 수학적 테크닉을 이용하면, 없음도 하나의 원소로 생각하여 추가한다. 
-
-[문제 이해]
-- 한번 입은 조합 절대 다시 안 입음
-- 안경, 코트, 상의, 신발 입음
-- 다음 날은 바지를 추가 혹은 안경 대신 렌즈 착용
-- 알몸이 아닌 상태로 며칠동안 밖에 돌아다닐 수 있을까?
-- 같은 종류의 의상은 하나만 입을 수 있음.
-
-- 중복허용 x
-- 의상수 - n개 
-- 같은 종류의 의상은 하나만 입을 수 있음.
-[입력]
-- 첫줄은 테케
-- 테케의 첫줄은 의상수 n,
-- 다음 n줄은 의상 이름과 종류
-
-[제약]
-0<= n <= 30,
-1<= 의상 이름 <= 20
-같은 이름으 의상 존재 x
-
-[출력]
-- 알몸이 아닌 상태로 입을 수 있는 의상 수
-
-[풀이전략]
-- 부분집합 -> 백트래킹?
-- 떠오르는 방법은 해쉬 맵 chaining을 만들어서 옷 종류와 옷 의상을 저장한다. 혹은 옷 종류와 옷 의상 수를 저장한다.
-- 그리고 백트래킹을 사용하여 부분집합을 돌면서 옷 의상수 곱한다.
-- 처음부터 백트래킹으로 접근해서 끝에 도
-
-- 해쉬맵을 이용해서 같은 의상종류 개수 체크
-- 안 입는 경우를 하나의 경우의 수로 생각함
-- 각 (의상의 개수+1)을 모두 곱한 다음에 1을 빼준다.
-
-*/
+    for(auto e : m) {
+        result *= (e.second + 1);
+    }
+    cout << result - 1 << '\n';
+    }
+ 
+}
