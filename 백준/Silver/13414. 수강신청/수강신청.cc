@@ -1,70 +1,32 @@
-
-
 #include <iostream>
 #include <algorithm>
+#include <set>
+#include <unordered_map>
 using namespace std;
 
 
-int k , l ; 
-string arr[500001] ;
-string temp ;
-
-unordered_map<string, int> m ; 
+set<pair<int,string>> s ;
+unordered_map<string,int> m ;
 
 int main() {
   ios::sync_with_stdio(0);
     cin.tie(0); 
+  int k, l ;
+  cin >> k >> l ;
 
-    cin >> k >> l ;
-    
     for(int i = 0 ; i < l ; i++) {
-        cin >> temp ;
-        m[temp] = i ;
+        string str ; 
+        cin >> str ;
+        m[str] = i ;
     }
 
     for(auto e : m) {
-        arr[e.second] = e.first;
+        s.insert(make_pair(e.second,e.first));
     }
 
-    for(auto v : arr) {
-        if(!v.empty() && k > 0) {
-            cout << v << '\n';
-            k--;
-        }
+    for(auto e: s) {
+        if (k == 0) break;
+        cout << e.second << '\n';
+        k--;
     }
-
-
 }
-
-/*
-[해결전략 참고]
-
-[시작]
-- 24년 3월 6일 
-[배울 점]
-- 학번은 인트로 하면 안됨 -> 맨 앞자리가 0이 될수 있음을 유의
-[문제 이해]
-- 더 빨리 누른 학생이 대기목록에 먼저
-- 이미 대기열에 있는 상태엣 버튼 한번 더 누르면 대기목록 맨 뒤로 밀려남. -> 가장 마지막 누른 위치만 살림.
-- 버튼 비활성화되면 대기목록 가장 앞에 있는 학생부터 수강신청 완료
-- 수강 가능 인원 꽉 차면 나머지 대기목록은 무시하고 수강신청 종료.
-
-[입력]
-- 첫째줄은 수강 가능 인원 K, 버튼 클릭 순서를 기록한 대기목록 길이 L
-- 두번째 줄버터 L줄은 수강신청 버튼을 클릭한 학생의 학번이 클릭 순서대로 주어짐
-
-[제약]
-- 1<= K <= 100,000 // 학번은 8자리 숫자
-
-[출력]
-- 성공한 인원의 학번을 출력하시오.
-
-[풀이전략]
-중복 허용이 안된다 -> 혹시 ? 해시 셋? 해시 맵?
-- 해시 맵을 이용하여 저장한 순서를 값으로 설정한다
-- 만약 중복이 발생하면 덮어 씌운다.
-- 배열을 하나만들어서 해시맵의 값을 배열의 인덱스로 해시맵의 키를 배열의 값으로 설정한다.
-- 배열을 돌면서 빈 공간은 버리고 최대 가능 인원이 찰때까지 순서대로 탐색한다.
-
-
-*/
