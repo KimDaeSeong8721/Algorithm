@@ -24,28 +24,14 @@ int main() {
         if(s.size() == 0) break;
         auto v = *s.begin();
         s.erase(v);
-        auto it = group.lower_bound(v.second) ; // lower_bound는 인자값과 같거나 큰 값의 it 리턴
+        auto it = group.lower_bound(-v.second+1) ; // lower_bound는 인자값과 같거나 큰 값의 it 리턴
+
         if(it == group.end()) {
-            // 1. 없거나 작은 경우.
-            if(group.size() == 0) {
-            // 없음
-            group.insert(1);
-            } else {
-            // 작음
-                int newValue = *prev(it) + 1;  
-                 group.erase(prev(it));            
-                 group.insert(newValue);  
-            }
+            group.insert(-1);
         } else {
-            // 2. 크거나 같은 경우
-            if(*prev(it) < v.second && it != group.begin()) {
-            // 이전 값이 v.second보다 작은 경우
-                int newValue = *prev(it) + 1;  
-                 group.erase(prev(it));             
-                 group.insert(newValue);  
-            } else {
-             group.insert(1);
-            }
+                int newV = *it - 1 ;
+                 group.erase(it);            
+                 group.insert(newV);  
         }
     }
     cout << group.size() ;
