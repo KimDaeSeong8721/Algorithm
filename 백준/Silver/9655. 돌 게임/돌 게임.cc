@@ -17,11 +17,8 @@ int main() {
     dp[3] = -1;
     dp[2] = 1;
     for(int i = 4 ; i <= n ; i++) {
-        if(dp[i-3] != 0) {
-            dp[i] = -dp[i-3];
-        } else {
             dp[i] = -dp[i-1];
-        }
+
     }
     if(dp[n] == -1) {
         cout << "SK";
