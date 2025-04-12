@@ -36,19 +36,16 @@ int main() {
 
     int lo = 1 ;
     int hi = *max_element(v.begin(), v.end());
-    
+    lo--;
+    hi++;
     while (lo + 1 < hi)
     {
         int mid = (lo + hi) / 2  ; 
         if(check(mid)) {
             lo = mid ;
         } else {
-            hi = mid -1;
+            hi = mid;
         }
     }
-    if (check(hi)) {
-        cout << hi;
-    } else {
-        cout << lo;
-    }
+    cout << lo ;
 }
