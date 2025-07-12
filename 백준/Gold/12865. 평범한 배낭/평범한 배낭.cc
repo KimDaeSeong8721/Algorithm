@@ -1,32 +1,38 @@
-#include <iostream>
-#include <algorithm>
-using namespace std;
+    #include <iostream>
+    #include <algorithm>
+    #include <set>
+    #include <unordered_map>
+    using namespace std;
 
 
-int n,k ;
-int dp[101][100'001]; // dp[i][j] : 최대 k무게까지 i번째까지 배낭에 넣을 수 있는 물건 가치의 최대합
-int w[101];
-int v[101];
-int main() {
-  ios::sync_with_stdio(0);
-    cin.tie(0); 
-    cin >> n >> k ;
 
-    for(int i = 1 ; i <= n ; i++){
-        cin >> w[i] >> v[i];
-    }
+    int w[101];
+    int v[101];
+    int dp[101][100001];
 
+    int main() {
+    ios::sync_with_stdio(0);
+        cin.tie(0); 
+        int n, k ;
+        cin >> n >> k ;
+        for(int i = 0 ; i < n ; i++) {
+            cin >> w[i] >> v[i];
+        }
 
-    for(int i = 1 ; i <= n ; i++){
-        for(int j = 1 ; j <= k ; j++) {
-            if(j-w[i] >= 0){
-                // 배낭에 물건 담음
-                dp[i][j] = max(dp[i-1][j],dp[i-1][j-w[i]] + v[i]) ;
-            } else {
-                // 배낭에 물건을 담지 않음.
-                dp[i][j] = dp[i-1][j];
+        // dp[i][j] : i번째 배낭까지 남은 j무게를 채울때 최대 가치값
+        for(int j = 0 ; j <= k ; j++){
+            if(j - w[0] >= 0 ) {
+                dp[0][j] = v[0];
             }
         }
+
+        for(int i = 1 ; i < n ; i++) {
+            for(int j = 0 ; j <= k ; j++) {
+                if (j-w[i] >= 0 )
+                    dp[i][j] = max(dp[i-1][j-w[i]] + v[i], dp[i-1][j]);
+                else
+                    dp[i][j] = dp[i-1][j] ;
+            }
+        }
+        cout << dp[n-1][k] ;
     }
-    cout << dp[n][k]; 
-}
